@@ -1,0 +1,13 @@
+{% extends 'staff_dashboard/template.html' %}
+
+{% block dashboard_content %}
+    <h2>Add a New Bakery Item</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Bakery Item</button>
+    </form>
+
+    <br>
+{% endblock %}

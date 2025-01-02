@@ -1,0 +1,17 @@
+{% load static %}
+{% include "bakery/header.html" %}
+
+<div class="payment-form">
+    <h2>Complete Your Payment</h2>
+
+    <form action="{% url 'checkout:initiate_payment' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="order_id" value="{{ order.id }}">
+        <label for="phone_number">Phone Number</label>
+        <input type="text" name="phone_number" placeholder="Enter your phone number" required>
+        <p>Total Amount: Kshs. {{ total_price }}</p>
+        <button type="submit">Proceed with M-Pesa Payment</button>
+    </form>
+</div>
+
+{% include "bakery/footer.html" %}

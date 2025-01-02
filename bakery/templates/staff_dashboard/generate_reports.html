@@ -1,0 +1,16 @@
+{% extends 'staff_dashboard/template.html' %}
+
+{% block dashboard_content %}
+<h2>Generate Reports</h2>
+<div class="report-section">
+    <p><strong>Total Sales:</strong> Kshs {{ total_sales }}</p>
+    <p><strong>Total Orders:</strong> {{ total_orders }}</p>
+    <p><strong>Pending Orders:</strong> {{ pending_orders }}</p>
+    <h3>Top Selling Items</h3>
+    <ul>
+        {% for item in top_items %}
+        <li>{{ item.product__name }} - {{ item.total_sold }} sold</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
