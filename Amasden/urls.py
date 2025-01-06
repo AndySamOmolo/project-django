@@ -26,6 +26,7 @@ urlpatterns = [
     path('user_dashboard/', include('user_dashboard.urls')),
     path('checkout/', include('checkout.urls')),
     path('staff-dashboard/', include('staff_dashboard.urls')),
+    path('admin_dashboard/', include('admin_dashboard.urls')),
 
 ]
 

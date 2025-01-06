@@ -1,7 +1,20 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, NewsletterSubscription
+
+class NewsletterSubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = NewsletterSubscription
+        fields = ['email']
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    subject = forms.CharField(max_length=200)
+    message = forms.CharField(widget=forms.Textarea)
+
 
 class CustomRegisterForm(UserCreationForm):
     email = forms.EmailField()

@@ -23,21 +23,20 @@ def get_details(request):
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             cart=cart,
-            status='Pending',
+            status='Pending', 
+            payment_status='Pending' 
         )
 
-        # Create OrderItems for each item in the cart
-        total_price = Decimal('0.00')  # Initialize total price
-        for item in cart.items.all():  # Assuming Cart has a related field 'items'
+        total_price = Decimal('0.00') 
+        for item in cart.items.all():
             order_item = OrderItem.objects.create(
                 order=order,
-                product=item.product,  # Assuming cart item has a 'product' field
+                product=item.product,  
                 quantity=item.quantity,
                 total_price=item.product.price * item.quantity
             )
-            total_price += order_item.total_price  # Add the item's total price to the order's total
+            total_price += order_item.total_price  
 
-        # Update order's total price (you can add this field to the Order model if needed)
         order.total_price = total_price
         order.save()
 
@@ -83,10 +82,6 @@ def initiate_payment(request):
     return redirect('checkout:get_details')
 
 
-
-
-
-
 @csrf_exempt
 def mpesa_callback(request):
     if request.method == 'POST':
@@ -99,7 +94,6 @@ def mpesa_callback(request):
             stk_callback = data.get('Body', {}).get('stkCallback', {})
             result_code = stk_callback.get('ResultCode')
             result_desc = stk_callback.get('ResultDesc')
-            checkout_request_id = stk_callback.get('CheckoutRequestID')
             order_id = stk_callback.get('OrderID')  # Ensure order_id is passed in callback
 
             if not result_code or not result_desc:
@@ -110,7 +104,7 @@ def mpesa_callback(request):
                 # Payment was successful
                 try:
                     order = Order.objects.get(id=order_id)
-                    order.status = 'In Progress' 
+                    order.status = 'In Progress'  # Change to the appropriate status
                     order.save()
 
                     # Clear the cart after successful payment
@@ -127,8 +121,8 @@ def mpesa_callback(request):
                     return render(request, 'checkout/payment_error.html', {'error': f"Order with ID {order_id} not found"})
 
             elif result_code == 1032:
-                # User canceled the request
-                return render(request, 'checkout/payment_error.html', {'error': "Payment was canceled by the user."})
+                # User canceled the request (possibly due to insufficient funds)
+                return render(request, 'checkout/payment_cancelled.html', {'message': "Payment was canceled by the user."})
 
             # Handle other failure cases
             elif result_code != 0:

@@ -180,22 +180,22 @@ fill: #333;
   .nav-link {
     display: block;
     padding: 10px 15px;
-    color: black; /* change this value to your preference */
+    color: black;
     background-color: transparent;
     border-radius: 0;
     transition: all 0.3s;
   }
 
   .nav-link:hover {
-    color: white; /* change this value to your preference */
-    background-color: black; /* change this value to your preference */
+    color: white; 
+    background-color: black; 
   }
 }
 
 
-/* Button styles */
+
 .menu-toggle {
-  display: none; /* Hide the button by default */
+  display: none;
   background-color: transparent;
   border: none;
   color: black;
@@ -203,7 +203,7 @@ fill: #333;
   transition: all 0.3s;
 }
 
-/* Show the button when the navbar is collapsed */
+
 @media (max-width: 767px) {
   .navbar-collapse {
     display: none;
@@ -214,7 +214,7 @@ fill: #333;
   }
 }
 
-/* Position the button */
+
 .menu-toggle {
   position: absolute;
   top: 0;
@@ -223,7 +223,7 @@ fill: #333;
   z-index: 999;
 }
 
-/* Style the button on hover */
+
 .menu-toggle:hover {
   color: purple;
 }
@@ -234,7 +234,80 @@ fill: #333;
 
 
 
+/* General Alert Container */
+.alert {
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+}
 
+/* Success Alert */
+.alert-success {
+  background-color: #28a745;
+  color: white;
+  border: 1px solid #218838;
+}
+
+.alert-success .alert-close {
+  color: white;
+}
+
+/* Error Alert */
+.alert-error {
+  background-color: #dc3545;
+  color: white;
+  border: 1px solid #c82333;
+}
+
+.alert-error .alert-close {
+  color: white;
+}
+
+/* Info Alert */
+.alert-info {
+  background-color: #17a2b8;
+  color: white;
+  border: 1px solid #138496;
+}
+
+.alert-info .alert-close {
+  color: white;
+}
+
+/* Warning Alert */
+.alert-warning {
+  background-color: #ffc107;
+  color: white;
+  border: 1px solid #e0a800;
+}
+
+.alert-warning .alert-close {
+  color: white;
+}
+
+/* Close button styling */
+.alert-close {
+  float: right;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+  color: white;
+}
+
+/* Fade out effect for closing alerts */
+.alert.hide {
+  opacity: 0;
+  visibility: hidden;
+}
 
 
 

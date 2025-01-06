@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'checkout',
     'staff_dashboard',
     'user_dashboard',
+    'admin_dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -147,12 +148,19 @@ MPESA_CONSUMER_KEY = 'w0yo5P2F0dxhLtCC3e6FbfQKy03jzuJu8oNfKKbGjaknIGAT'
 MPESA_CONSUMER_SECRET = 'hrKCaMDlLbfGTzrbaRjxlfRTuNGgjzLfgwm1aLQl6mL2ch6d8LTu5BPB8uAeOHs4'
 MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
 MPESA_BUSINESS_SHORTCODE = 174379
-MPESA_CALLBACK_URL = 'https://78ca-196-202-173-156.ngrok-free.app/checkout/mpesa-callback/'
+MPESA_CALLBACK_URL = 'https://974e-196-202-173-156.ngrok-free.app/checkout/mpesa-callback/'
 
-# settings.py
+
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '78ca-196-202-173-156.ngrok-free.app']
+ALLOWED_HOSTS = ['*']
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'andysam505@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = 'tmyn fmdn lkgx iejh'  # Replace with your email password
 
 
 

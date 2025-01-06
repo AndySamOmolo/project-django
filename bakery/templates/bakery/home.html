@@ -8,46 +8,29 @@
   </div>
 
 
- <div class="container">
-  <h1 class="tagline">Bestsellers in Our Bakery</h1>
-
-  <div class="items-container">
-    <div class="item">
-      <div class="image-container">
-        <img src="{% static 'images/pic (12).jpg' %}" alt="Image 1">
-      </div>
-      <div class="description">
-        <p>Description for Image 1</p>
-      </div>
-      <div class="btnopt">
-        <button class="btn1" type="button" name="button">Select Options</button>
-      </div>
-    </div>
-    <div class="item">
-      <div class="image-container">
-        <img src="{% static 'images/pic (2).jpg' %}" alt="Image 2">
-      </div>
-      <div class="description">
-        <p>Description for Image 2</p>
-      </div>
-      <div class="btnopt">
-        <button class="btn1" type="button" name="button">Select Options</button>
-      </div>
-    </div>
-    <div class="item">
-      <div class="image-container">
-        <img src="{% static 'images/pic (3).jpg' %}" alt="Image 3">
-      </div>
-      <div class="description">
-        <p>Description for Image 3</p>
-      </div>
-      <div class="btnopt">
-        <button class="btn1" type="button" name="button">Select Options</button>
-      </div>
+  <div class="container">
+    <h1 class="tagline">Bestsellers in Our Bakery</h1>
+  
+    <div class="items-container">
+      {% for product in bestsellers %}
+        <div class="item">
+          <div class="image-container">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          </div>
+          <div class="description">
+            <p>{{ product.name }}</p>
+            <p>{{ product.get_price_with_currency }}</p>
+          </div>
+          <div class="btnopt">
+            <a href="{% url 'cake_template' slug=product.slug %}" class="btn1">Select Options</a>
+          </div>
+        </div>
+      {% empty %}
+        <p>No bestsellers available at the moment.</p>
+      {% endfor %}
     </div>
   </div>
-
-</div>
+  
 
 
 
@@ -83,18 +66,19 @@
 
 
 <div class="newsletter-container">
-  <form action="#" method="post" class="newsletter-form">
+  <form action="{% url 'home' %}" method="post" class="newsletter-form">
     {% csrf_token %}
     <div class="subscribe-title">
       <h4>Subscribe to Our Newsletter</h4>
     </div>
     <div class="form-group">
       <label for="email" class="sr-only">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      {{ form.email }} 
       <button type="submit" class="btn2">Subscribe</button>
     </div>
   </form>
 </div>
+
 
 
 <script type="text/javascript">
